@@ -1,0 +1,32 @@
+x-common-variables: &common-variables
+  PUID: 1000
+  PGID: 1000
+
+services:
+  watchtower-zerotier:
+    image: containrrr/watchtower
+    container_name: watchtower-zerotier
+    environment: *common-variables
+    command: --cleanup --schedule "0 4 * * * *"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  zerotier:
+    image: "zyclonite/zerotier:router"
+    container_name: zerotier
+    devices:
+      - /dev/net/tun
+    network_mode: host
+    volumes:
+      - '/var/lib/zerotier-one:/var/lib/zerotier-one'
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - NET_RAW
+    restart: unless-stopped
+    environment:
+      <<: *common-variables
+      ZEROTIER_ONE_LOCAL_PHYS: eth0
+      ZEROTIER_ONE_USE_IPTABLES_NFT: false
+      ZEROTIER_ONE_GATEWAY_MODE: inbound
+      # ZEROTIER_ONE_NETWORK_IDS: <network_id>
