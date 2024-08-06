@@ -59,3 +59,15 @@ Now go to Zerotier web UI and make a route
 ```
 
 Now remember to do what you are told by the script to expose the route in web UI, probably under General -> Managed Routes.
+
+## IMPORTANT
+
+After everything seems to be working, subnet and so forth, reboot the zerotier server host, and verify back again.
+
+This verifies the iptables where saved.
+
+## Troubleshooting
+
+Try first by restarting clients, if not try reboot computer. 
+
+If those won't work, dive in to it and google it.
