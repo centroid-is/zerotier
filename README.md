@@ -71,3 +71,10 @@ This verifies the iptables where saved.
 Try first by restarting clients, if not try reboot computer. 
 
 If those won't work, dive in to it and google it.
+
+## Nat subnet
+```bash
+centroid@foo ~/> sudo ./nat2.sh
+Usage: ./nat.sh <interface> <src-subnet> <dst-subnet>
+Example: ./nat.sh ztm5tynveb 10.10.19.0/24 10.51.40.0/24
+```
